@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iris Yuan · E-Commerce Operator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EEF6F1;
+  --surface: #FFFFFF;
+  --surface2: #F4FAF7;
+  --border: #DDE9E3;
+  --ink: #111714;
+  --ink-2: #4A5550;
+  --ink-3: #8A9A93;
+  --green: #1DB865;
+  --green-light: #E4F5EC;
+  --green-mid: #A8DFC0;
+  --accent: #0D5C38;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.06);
+  --shadow-hover: 0 8px 32px rgba(0,0,0,0.11);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:'Sora',sans-serif;overflow-x:hidden;}
+
+/* ── TOP NAV ── */
+.topnav {
+  position: fixed; top:0; left:0; right:0;
+  height: 60px;
+  background: rgba(238,246,241,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 200;
+}
+.topnav-brand { font-size:15px; font-weight:600; color:var(--ink); letter-spacing:-0.01em; }
+.topnav-links { display:flex; align-items:center; gap:4px; }
+.topnav-link {
+  padding:6px 14px; border-radius:20px;
+  font-size:13px; font-weight:500; color:var(--ink-2);
+  text-decoration:none; transition:all .2s; position:relative;
+}
+.topnav-link:hover { background:var(--surface); color:var(--ink); }
+.topnav-link::after {
+  content:''; position:absolute; bottom:-2px; left:50%; right:50%;
+  height:2px; background:var(--green); border-radius:1px;
+  transition:left .25s, right .25s;
+}
+.topnav-link:hover::after { left:16px; right:16px; }
+.topnav-right { display:flex; align-items:center; gap:10px; }
+.lang-toggle { display:flex; background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:3px; gap:2px; }
+.lang-btn { padding:4px 14px; border-radius:16px; border:none; background:transparent; font-family:'Sora',sans-serif; font-size:12px; font-weight:600; color:var(--ink-2); cursor:pointer; transition:all .2s; }
+.lang-btn.active { background:var(--ink); color:white; }
+.topnav-cta {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:8px 18px; background:var(--ink); color:white;
+  border-radius:20px; font-size:13px; font-weight:600;
+  text-decoration:none; border:none; cursor:pointer;
+  font-family:'Sora',sans-serif; transition:all .2s;
+}
+.topnav-cta:hover { background:var(--accent); }
+@media(max-width:768px){ .topnav-links{display:none;} .topnav{padding:0 20px;} }
+
+/* ── HERO ── */
+.page { padding-top:60px; }
+#hero {
+  position:relative; min-height:calc(100vh - 60px);
+  display:grid; grid-template-columns:1fr 460px;
+  gap:40px; align-items:center;
+  max-width:1160px; margin:0 auto; padding:60px 40px;
+}
+@media(max-width:900px){ #hero{grid-template-columns:1fr; padding:40px 24px 80px; min-height:auto; gap:48px;} }
+
+.hero-left { display:flex; flex-direction:column; }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:20px; padding:6px 16px;
+  font-size:12px; font-weight:500; color:var(--ink-2);
+  margin-bottom:28px; align-self:flex-start;
+}
+.badge-dot { width:7px; height:7px; background:var(--green); border-radius:50%; flex-shrink:0; animation:pulse 2s infinite; }
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+
+.hero-name {
+  font-family:'Lora',serif;
+  font-size:clamp(48px,6.5vw,80px);
+  font-weight:600; line-height:1.05;
+  letter-spacing:-.03em; color:var(--ink); margin-bottom:16px;
+  min-height:1.1em;
+}
+.hero-name .green { color:var(--green); font-style:italic; font-weight:500; }
+
+.hero-tagline {
+  font-family:'Lora',serif;
+  font-size:clamp(16px,2vw,22px);
+  font-weight:400; font-style:italic;
+  color:var(--ink-3); line-height:1.5; margin-bottom:28px;
+  min-height:2em;
+}
+.cursor { display:inline-block; width:2px; height:1em; background:var(--green); margin-left:2px; vertical-align:middle; animation:blink .8s infinite; }
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+.hero-desc { font-size:15px; line-height:1.72; color:var(--ink-2); max-width:480px; margin-bottom:36px; }
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:36px; }
+.btn-dark {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:13px 26px; background:var(--ink); color:white;
+  border-radius:28px; font-size:14px; font-weight:600;
+  text-decoration:none; border:none; cursor:pointer;
+  font-family:'Sora',sans-serif; transition:all .2s;
+}
+.btn-dark:hover { background:var(--accent); transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,0,0,.15); }
+.btn-outline {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:13px 26px; background:var(--surface); color:var(--ink);
+  border-radius:28px; font-size:14px; font-weight:600;
+  text-decoration:none; border:1.5px solid var(--border); cursor:pointer;
+  font-family:'Sora',sans-serif; transition:all .2s;
+}
+.btn-outline:hover { border-color:var(--ink); transform:translateY(-1px); }
+.hero-socials { display:flex; gap:20px; flex-wrap:wrap; align-items:center; }
+.hero-social { font-size:12px; color:var(--ink-3); text-decoration:none; font-weight:500; transition:color .2s; display:flex; align-items:center; gap:5px; }
+.hero-social:hover { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
+
+/* ── PORTRAIT ── */
+.hero-right { display:flex; flex-direction:column; align-items:center; gap:16px; }
+@media(max-width:900px){ .hero-right{order:-1;} }
+.portrait-ring {
+  width:360px; height:360px; border-radius:50%;
+  background:var(--surface);
+  box-shadow:0 12px 60px rgba(0,0,0,.12),0 0 0 8px var(--green-light),0 0 0 16px rgba(168,223,192,.3);
+  overflow:hidden; flex-shrink:0; position:relative;
+}
+.portrait-ring img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+@media(max-width:900px){ .portrait-ring{width:240px; height:240px;} }
+
+.stat-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%; }
+@media(max-width:900px){ .stat-row{grid-template-columns:repeat(4,1fr); gap:8px;} }
+@media(max-width:520px){ .stat-row{grid-template-columns:1fr 1fr;} }
+.stat-box { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:14px 16px; text-align:center; transition:all .25s; }
+.stat-box:hover { box-shadow:var(--shadow-hover); transform:translateY(-1px); }
+.stat-val { font-family:'Lora',serif; font-size:20px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+.stat-lbl { font-size:10px; color:var(--ink-3); font-weight:500; letter-spacing:.03em; line-height:1.4; }
+
+/* ── SCROLL HINT ── */
+.scroll-hint {
+  position:absolute; bottom:32px; left:50%;
+  transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  pointer-events:none; z-index:10;
+  animation:fadeInDelay 1.8s ease forwards; opacity:0;
+}
+@keyframes fadeInDelay{0%{opacity:0;}70%{opacity:0;}100%{opacity:1;}}
+.scroll-mouse { width:22px; height:34px; border:2px solid var(--ink-3); border-radius:11px; display:flex; align-items:flex-start; justify-content:center; padding-top:5px; }
+.scroll-wheel { width:3px; height:7px; background:var(--green); border-radius:2px; animation:scrollWheel 1.8s ease infinite; }
+@keyframes scrollWheel{0%{transform:translateY(0);opacity:1;}60%{transform:translateY(10px);opacity:0;}61%{transform:translateY(0);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+.scroll-label { font-size:10px; font-weight:600; color:var(--ink-3); letter-spacing:.12em; text-transform:uppercase; }
+
+/* ── SECTION SHARED ── */
+.section { padding:80px 0; }
+.section-inner { max-width:1160px; margin:0 auto; padding:0 40px; }
+@media(max-width:768px){ .section{padding:56px 0;} .section-inner{padding:0 20px;} }
+.sec-label {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--green-light); border:1px solid var(--green-mid);
+  border-radius:20px; padding:4px 14px;
+  font-size:11px; font-weight:700; color:var(--accent);
+  letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px;
+}
+.sec-title { font-family:'Lora',serif; font-size:clamp(28px,3.5vw,42px); font-weight:600; color:var(--ink); letter-spacing:-.02em; line-height:1.15; margin-bottom:8px; }
+.sec-desc { font-size:14px; color:var(--ink-3); line-height:1.65; }
+
+/* ── ABOUT ── */
+#about { background:var(--bg); }
+.comp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:40px; }
+@media(max-width:900px){ .comp-grid{grid-template-columns:1fr;} }
+.comp-card {
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px 24px;
+  transition:all .25s; position:relative; overflow:hidden;
+}
+.comp-card::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--green),var(--green-mid)); opacity:0; transition:opacity .25s; }
+.comp-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-2px); }
+.comp-card:hover::after { opacity:1; }
+.comp-icon { width:40px; height:40px; background:var(--green-light); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:14px; }
+.comp-num { font-size:10px; font-weight:700; color:var(--green); letter-spacing:.1em; text-transform:uppercase; margin-bottom:6px; }
+.comp-card:hover .comp-num { color:var(--accent); }
+.comp-title { font-size:15px; font-weight:600; color:var(--ink); margin-bottom:8px; line-height:1.3; }
+.comp-desc { font-size:13px; color:var(--ink-2); line-height:1.65; }
+.comp-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:12px; }
+.comp-tag-mini { font-size:10px; font-weight:600; padding:2px 9px; border-radius:9px; background:var(--green-light); color:var(--accent); border:1px solid var(--green-mid); }
+
+/* personality chips */
+.personality-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; margin-bottom:40px; }
+.p-chip {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:7px 14px; border-radius:20px;
+  background:var(--surface); border:1px solid var(--border);
+  font-size:12px; font-weight:500; color:var(--ink-2);
+  transition:all .2s;
+}
+.p-chip:hover { border-color:var(--green-mid); background:var(--green-light); color:var(--accent); }
+.p-chip-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+
+/* about bottom layout */
+.about-bottom { display:grid; grid-template-columns:1fr 380px; gap:24px; }
+@media(max-width:900px){ .about-bottom{grid-template-columns:1fr;} }
+
+/* timeline */
+.tl-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:28px; }
+.tl-label { font-size:11px; font-weight:700; color:var(--ink-3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:20px; }
+.tl-list { display:flex; flex-direction:column; }
+.tl-item { display:grid; grid-template-columns:110px 20px 1fr; gap:0 14px; padding-bottom:24px; cursor:default; }
+.tl-item:last-child { padding-bottom:0; }
+.tl-date { font-size:11px; color:var(--ink-3); font-weight:500; padding-top:3px; text-align:right; }
+.tl-dots { display:flex; flex-direction:column; align-items:center; }
+.tl-dot { width:8px; height:8px; background:var(--border); border-radius:50%; margin-top:4px; flex-shrink:0; z-index:1; transition:all .2s; }
+.tl-item:hover .tl-dot { background:var(--green); box-shadow:0 0 0 4px var(--green-light); }
+.tl-line { width:1px; flex:1; background:var(--border); margin-top:4px; }
+.tl-item:last-child .tl-line { display:none; }
+.tl-co { font-size:15px; font-weight:600; color:var(--ink); margin-bottom:3px; transition:color .2s; }
+.tl-item:hover .tl-co { color:var(--accent); }
+.tl-role { font-size:12px; color:var(--ink-3); margin-bottom:4px; }
+.tl-tag { display:inline-block; padding:2px 10px; border-radius:10px; font-size:10px; font-weight:600; letter-spacing:.04em; }
+.tag-f { background:var(--green-light); color:var(--accent); border:1px solid var(--green-mid); }
+.tag-e { background:var(--surface2); color:var(--ink-3); border:1px solid var(--border); }
+.tl-sub { margin-top:6px; display:flex; flex-direction:column; gap:3px; }
+.tl-sub-item { font-size:11px; color:var(--ink-3); padding-left:10px; position:relative; }
+.tl-sub-item::before { content:'–'; position:absolute; left:0; color:var(--green-mid); }
+
+/* edu */
+.edu-stack { display:flex; flex-direction:column; gap:14px; }
+.edu-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; transition:all .25s; }
+.edu-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-1px); }
+.edu-school { font-size:14px; font-weight:600; color:var(--ink); margin-bottom:4px; }
+.edu-deg { font-size:12px; color:var(--ink-2); line-height:1.5; margin-bottom:10px; }
+.edu-pills { display:flex; gap:6px; flex-wrap:wrap; }
+.edu-gpa { padding:3px 10px; background:var(--green-light); border:1px solid var(--green-mid); border-radius:10px; font-size:11px; color:var(--accent); font-weight:700; }
+.edu-pill { padding:3px 10px; background:var(--surface2); border:1px solid var(--border); border-radius:10px; font-size:11px; color:var(--ink-2); font-weight:500; }
+
+/* ── EXPERIENCE ── */
+#experience { background:var(--surface2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.desens-note { display:inline-flex; align-items:center; gap:7px; background:var(--green-light); border:1px solid var(--green-mid); border-radius:8px; padding:8px 16px; margin-bottom:28px; font-size:12px; color:var(--accent); font-weight:500; }
+.exp-section-label { font-size:11px; font-weight:700; color:var(--ink-3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px; margin-top:8px; display:flex; align-items:center; gap:10px; }
+.exp-section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+.exp-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+@media(max-width:900px){ .exp-grid{grid-template-columns:1fr;} }
+.exp-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; cursor:pointer; transition:all .25s; box-shadow:var(--shadow); }
+.exp-card:hover { border-color:var(--green-mid); transform:translateY(-2px); box-shadow:var(--shadow-hover); }
+.exp-card.open { border-color:var(--green-mid); }
+.exp-top { padding:22px 22px 0; }
+.exp-row { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+.exp-co { font-size:17px; font-weight:700; color:var(--ink); margin-bottom:3px; }
+.exp-meta { font-size:11px; color:var(--ink-3); font-weight:500; line-height:1.6; }
+.exp-tag-f { font-size:10px; font-weight:700; padding:3px 10px; border-radius:10px; background:var(--green-light); color:var(--accent); border:1px solid var(--green-mid); white-space:nowrap; flex-shrink:0; }
+.exp-tag-i { font-size:10px; font-weight:700; padding:3px 10px; border-radius:10px; background:var(--surface2); color:var(--ink-3); border:1px solid var(--border); white-space:nowrap; flex-shrink:0; }
+.exp-metrics { display:flex; border-top:1px solid var(--border); margin-top:18px; background:var(--surface2); }
+.exp-m { flex:1; padding:12px 14px; border-right:1px solid var(--border); }
+.exp-m:last-child { border-right:none; }
+.exp-mval { font-family:'Lora',serif; font-size:18px; font-weight:600; color:var(--accent); margin-bottom:2px; }
+.exp-mlbl { font-size:9px; color:var(--ink-3); font-weight:600; letter-spacing:.04em; line-height:1.4; text-transform:uppercase; }
+.exp-toggle { padding:10px 22px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); font-size:11px; color:var(--ink-3); font-weight:600; letter-spacing:.06em; text-transform:uppercase; transition:color .2s; background:var(--surface2); }
+.exp-card:hover .exp-toggle, .exp-card.open .exp-toggle { color:var(--accent); }
+.exp-chev { font-size:13px; transition:transform .3s; }
+.exp-card.open .exp-chev { transform:rotate(180deg); }
+.exp-body { display:none; padding:0 22px 22px; border-top:1px solid var(--border); }
+.exp-card.open .exp-body { display:block; }
+.exp-body ul { list-style:none; display:flex; flex-direction:column; gap:9px; padding-top:18px; }
+.exp-body ul li { font-size:13px; line-height:1.65; color:var(--ink-2); padding-left:15px; position:relative; }
+.exp-body ul li::before { content:'·'; position:absolute; left:0; color:var(--green); font-size:20px; line-height:1.3; }
+.exp-body ul li b { color:var(--ink); font-weight:600; }
+/* img slot inside exp body */
+.exp-img-slot { margin-top:16px; border-radius:var(--radius-sm); border:1px dashed var(--green-mid); background:var(--green-light); padding:20px; text-align:center; font-size:12px; color:var(--accent); font-weight:500; }
+.exp-links { margin-top:14px; display:flex; flex-wrap:wrap; gap:8px; }
+.exp-link { font-size:11px; font-weight:600; color:var(--accent); text-decoration:none; padding:4px 12px; border-radius:10px; border:1px solid var(--green-mid); background:var(--green-light); transition:all .2s; }
+.exp-link:hover { background:var(--accent); color:white; border-color:var(--accent); }
+
+/* ── PROJECTS ── */
+#projects { background:var(--bg); }
+.proj-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media(max-width:900px){ .proj-grid{grid-template-columns:1fr;} }
+.proj-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:all .25s; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+.proj-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-3px); }
+.proj-body { flex:1; }
+.proj-img { height:220px; overflow:hidden; position:relative; }
+.proj-img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s; }
+.proj-img-duo { height:220px; display:grid; grid-template-columns:1fr 1fr; overflow:hidden; position:relative; }
+.proj-img-duo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s; }
+.proj-card:hover .proj-img img,
+.proj-card:hover .proj-img-duo img { transform:scale(1.04); }
+.proj-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(17,23,20,.75) 0%,transparent 60%); pointer-events:none; }
+.proj-label { position:absolute; bottom:16px; left:20px; }
+.proj-tag { font-size:10px; font-weight:700; color:rgba(255,255,255,.65); letter-spacing:.1em; text-transform:uppercase; margin-bottom:4px; }
+.proj-name { font-family:'Lora',serif; font-size:20px; font-weight:600; color:white; }
+.proj-body { padding:20px 22px 22px; }
+.proj-desc { font-size:13px; color:var(--ink-2); line-height:1.65; margin-bottom:16px; }
+.proj-stats { display:flex; gap:24px; border-top:1px solid var(--border); padding-top:14px; flex-wrap:wrap; }
+.pstat-val { font-family:'Lora',serif; font-size:22px; font-weight:600; color:var(--ink); margin-bottom:2px; }
+.pstat-lbl { font-size:10px; color:var(--ink-3); font-weight:600; letter-spacing:.05em; text-transform:uppercase; }
+.data-img { margin-top:16px; border-radius:var(--radius-sm); overflow:hidden; border:1px solid var(--border); }
+.data-img img { width:100%; display:block; }
+.data-img-cap { padding:9px 14px; background:var(--surface2); border-top:1px solid var(--border); font-size:11px; color:var(--ink-3); font-weight:500; }
+/* gallery for activity photos */
+.photo-gallery { display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:8px; margin-top:14px; border-radius:var(--radius-sm); }
+.photo-gallery::-webkit-scrollbar { height:4px; }
+.photo-gallery::-webkit-scrollbar-track { background:var(--border); border-radius:2px; }
+.photo-gallery::-webkit-scrollbar-thumb { background:var(--green-mid); border-radius:2px; }
+.gallery-img { flex:0 0 auto; width:200px; height:140px; border-radius:10px; overflow:hidden; scroll-snap-align:start; cursor:pointer; transition:transform .2s; }
+.gallery-img img { width:100%; height:100%; object-fit:cover; display:block; }
+.gallery-img:hover { transform:scale(1.03); }
+/* lightbox */
+.lightbox { position:fixed; inset:0; background:rgba(0,0,0,.85); z-index:1000; display:none; align-items:center; justify-content:center; }
+.lightbox.open { display:flex; }
+.lightbox img { max-width:90vw; max-height:88vh; object-fit:contain; border-radius:12px; }
+.lightbox-close { position:fixed; top:20px; right:28px; color:white; font-size:30px; cursor:pointer; line-height:1; z-index:1001; opacity:.7; transition:opacity .2s; }
+.lightbox-close:hover { opacity:1; }
+/* proj action */
+.proj-action { margin-top:14px; }
+.proj-link { display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; color:var(--accent); text-decoration:none; padding:6px 14px; border-radius:12px; border:1px solid var(--green-mid); background:var(--green-light); transition:all .2s; }
+.proj-link:hover { background:var(--accent); color:white; border-color:var(--accent); }
+/* proj full-width card */
+.proj-card-wide { grid-column:1/-1; }
+@media(max-width:900px){ .proj-card-wide{grid-column:auto;} }
+/* text-only proj */
+.proj-text-header { padding:28px 28px 0; }
+.proj-text-body { padding:0 28px 28px; }
+
+/* ── CONTACT ── */
+#contact { background:var(--surface); border-top:1px solid var(--border); }
+.contact-inner { max-width:560px; margin:0 auto; padding:80px 24px; text-align:center; }
+.contact-title { font-family:'Lora',serif; font-size:clamp(36px,5vw,58px); font-weight:600; color:var(--ink); letter-spacing:-.025em; line-height:1.1; margin:20px 0 14px; }
+.contact-title .green { color:var(--green); font-style:italic; }
+.contact-sub { font-size:14px; color:var(--ink-3); line-height:1.65; margin-bottom:40px; max-width:400px; margin-left:auto; margin-right:auto; }
+.contact-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+@media(max-width:520px){ .contact-cards{grid-template-columns:1fr;} }
+.contact-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:20px 14px; text-decoration:none; transition:all .2s; display:flex; flex-direction:column; align-items:center; gap:8px; }
+.contact-card:hover { border-color:var(--ink); background:white; box-shadow:var(--shadow-hover); }
+.contact-icon { width:36px; height:36px; background:var(--surface); border:1px solid var(--border); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:16px; transition:all .2s; }
+.contact-card:hover .contact-icon { background:var(--ink); color:white; border-color:var(--ink); }
+.contact-lbl { font-size:11px; font-weight:700; color:var(--ink); letter-spacing:.05em; text-transform:uppercase; }
+.contact-val { font-size:11px; color:var(--ink-3); word-break:break-all; }
+
+/* ── FOOTER ── */
+footer { padding:20px 40px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--ink-3); flex-wrap:wrap; gap:8px; background:var(--surface2); }
+@media(max-width:520px){ footer{padding:16px 20px;} }
+
+/* ── FLOATING CHAT ── */
+.chat-float { position:fixed; bottom:24px; right:24px; z-index:300; }
+.chat-btn { display:flex; align-items:center; gap:9px; padding:12px 20px 12px 14px; background:var(--ink); color:white; border-radius:28px; border:none; cursor:pointer; font-family:'Sora',sans-serif; font-size:13px; font-weight:600; box-shadow:0 4px 20px rgba(0,0,0,.2); transition:all .25s; }
+.chat-btn:hover { background:var(--accent); transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,0,0,.25); }
+.chat-icon { width:28px; height:28px; background:rgba(255,255,255,.13); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; }
+.chat-panel { position:absolute; bottom:calc(100% + 12px); right:0; width:320px; background:white; border-radius:var(--radius); box-shadow:0 20px 60px rgba(0,0,0,.14); border:1px solid var(--border); display:none; overflow:hidden; flex-direction:column; }
+@media(max-width:400px){ .chat-panel{width:calc(100vw - 32px); right:-4px;} }
+.chat-panel.open { display:flex; animation:panelUp .2s ease; }
+@keyframes panelUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.chat-head { padding:14px 18px; background:var(--ink); display:flex; align-items:center; justify-content:space-between; }
+.chat-head-l { display:flex; align-items:center; gap:10px; }
+.chat-av { width:32px; height:32px; border-radius:50%; object-fit:cover; object-position:top; border:2px solid rgba(255,255,255,.2); }
+.chat-head-info h4 { font-size:13px; font-weight:600; color:white; margin-bottom:1px; }
+.chat-head-info p { font-size:10px; color:rgba(255,255,255,.45); display:flex; align-items:center; gap:4px; }
+.chat-dot { width:5px; height:5px; background:var(--green); border-radius:50%; }
+.chat-x { background:rgba(255,255,255,.1); border:none; color:white; width:26px; height:26px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:16px; transition:all .2s; }
+.chat-x:hover { background:rgba(255,255,255,.2); }
+.chat-msgs { padding:14px; max-height:240px; overflow-y:auto; display:flex; flex-direction:column; gap:9px; background:var(--surface2); }
+.msg { padding:9px 13px; border-radius:13px; font-size:13px; line-height:1.5; max-width:85%; }
+.msg.iris { background:white; color:var(--ink); align-self:flex-start; border-bottom-left-radius:3px; border:1px solid var(--border); box-shadow:0 1px 4px rgba(0,0,0,.05); }
+.msg.user { background:var(--ink); color:white; align-self:flex-end; border-bottom-right-radius:3px; }
+.chat-inp-row { display:flex; border-top:1px solid var(--border); background:white; }
+.chat-inp { flex:1; padding:12px 14px; border:none; font-family:'Sora',sans-serif; font-size:13px; color:var(--ink); outline:none; }
+.chat-inp::placeholder { color:var(--ink-3); }
+.chat-send { width:42px; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--ink-3); font-size:18px; transition:color .2s; }
+.chat-send:hover { color:var(--accent); }
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(20px); transition:opacity .6s ease,transform .6s cubic-bezier(.16,1,.3,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── LANG ── */
+[data-lang="zh"]{display:none;}
+body.zh [data-lang="en"]{display:none;}
+body.zh [data-lang="zh"]{display:revert;}
+body.zh span[data-lang="zh"]{display:inline;}
+body.zh span[data-lang="en"]{display:none;}
+span[data-lang="zh"]{display:none;}
+</style>
+</head>
+<body>
+
+<!-- ══ TOP NAV ══ -->
+<nav class="topnav">
+  <div class="topnav-brand">Iris Yuan</div>
+  <div class="topnav-links">
+    <a class="topnav-link" href="#about"><span data-lang="en">About</span><span data-lang="zh">关于我</span></a>
+    <a class="topnav-link" href="#experience"><span data-lang="en">Experience</span><span data-lang="zh">工作经历</span></a>
+    <a class="topnav-link" href="#projects"><span data-lang="en">Projects</span><span data-lang="zh">实操项目</span></a>
+    <a class="topnav-link" href="#contact"><span data-lang="en">Contact</span><span data-lang="zh">联系</span></a>
+  </div>
+  <div class="topnav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnEn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+    <a class="topnav-cta" href="resume.pdf" download="苑盈莹_Iris_Resume.pdf">
+      <span data-lang="en">↓ Resume</span><span data-lang="zh">↓ 下载简历</span>
+    </a>
+  </div>
+</nav>
+
+<div class="page">
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span data-lang="en">Supply-Side Operator · AI Explorer · Cross-border</span>
+      <span data-lang="zh">供给侧运营 · AI探索者 · 跨文化协作</span>
+    </div>
+
+    <h1 class="hero-name" id="heroName"></h1>
+
+    <div class="hero-tagline" id="heroTagline"><span class="cursor"></span></div>
+
+    <p class="hero-desc" data-lang="en">3+ years in fashion e-commerce across <b>platform &amp; brand sides</b> — AliExpress, SHEIN, Florasis, Poizon. Strengths in supply-side operations, merchant growth, and cross-border GTM.</p>
+    <p class="hero-desc" data-lang="zh">3年+时尚电商经验，横跨<b>平台方与品牌方</b>——AliExpress、SHEIN、花西子、得物。核心优势在于供给侧运营、商家成长与跨境GTM策略。</p>
+
+    <div class="hero-btns">
+      <a href="#contact" class="btn-dark"><span data-lang="en">Get in Touch</span><span data-lang="zh">联系我</span> →</a>
+      <a href="#projects" class="btn-outline"><span data-lang="en">View Projects</span><span data-lang="zh">查看项目</span></a>
+    </div>
+
+    <div class="hero-socials">
+      <a href="mailto:irisyuan0926@163.com" class="hero-social">✉ irisyuan0926@163.com</a>
+      <a href="tel:18547785996" class="hero-social">✆ 185-4778-5996</a>
+      <a href="https://www.linkedin.com/in/iris-y-6a75a7154" target="_blank" class="hero-social">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="portrait-ring">
+      <img src="素材/个人照片.png" alt="Iris Yuan">
+    </div>
+  </div>
+
+  <div class="scroll-hint" id="scrollHintEn" data-lang="en">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+  <div class="scroll-hint" id="scrollHintZh" data-lang="zh">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span class="scroll-label">向下滑动</span>
+  </div>
+</section>
+
+<!-- ══ ABOUT ME ══ -->
+<section id="about" class="section">
+  <div class="section-inner">
+    <div class="sec-label reveal"><span data-lang="en">01 · About Me</span><span data-lang="zh">01 · 关于我</span></div>
+    <h2 class="sec-title reveal" data-lang="en">Why Iris Stands Out</h2>
+    <h2 class="sec-title reveal" data-lang="zh">核心竞争力</h2>
+    <p class="sec-desc reveal" style="margin-bottom:12px;" data-lang="en">Platform &amp; brand dual perspective across AliExpress, SHEIN, Florasis and Poizon — with quantifiable GMV results at every stage of the funnel, from supply assortment to merchant growth to influencer marketing.</p>
+    <p class="sec-desc reveal" style="margin-bottom:12px;" data-lang="zh">横跨平台方与品牌方的双重实战视角——AliExpress、SHEIN、花西子、得物，在货盘运营、商家成长、内容营销各链路均有可量化的GMV成果。</p>
+
+    <!-- Personality chips -->
+    <div class="personality-row reveal">
+      <div class="p-chip"><span class="p-chip-dot" style="background:#1DB865;"></span><span data-lang="en">Data-Driven</span><span data-lang="zh">数据驱动</span></div>
+      <div class="p-chip"><span class="p-chip-dot" style="background:#0D5C38;"></span><span data-lang="en">Strong Executor</span><span data-lang="zh">执行力强</span></div>
+      <div class="p-chip"><span class="p-chip-dot" style="background:#A8DFC0;"></span><span data-lang="en">Cross-cultural Communicator</span><span data-lang="zh">跨文化协作</span></div>
+      <div class="p-chip"><span class="p-chip-dot" style="background:#1DB865;"></span><span data-lang="en">AI Tools Power User</span><span data-lang="zh">AI工具重度用户</span></div>
+      <div class="p-chip"><span class="p-chip-dot" style="background:#0D5C38;"></span><span data-lang="en">Curiosity-Driven</span><span data-lang="zh">好奇心驱动</span></div>
+      <div class="p-chip"><span class="p-chip-dot" style="background:#A8DFC0;"></span><span data-lang="en">Fast Learner</span><span data-lang="zh">学习速度快</span></div>
+    </div>
+
+    <!-- 3 Core Competencies -->
+    <div class="comp-grid">
+      <div class="comp-card reveal">
+        <div class="comp-icon">📦</div>
+        <div class="comp-num">Core Strength 01</div>
+        <div class="comp-title" data-lang="en">Supply-Side Strategy & Merchant Growth</div>
+        <div class="comp-title" data-lang="zh">供给侧运营 × 商家成长</div>
+        <div class="comp-desc" data-lang="en">End-to-end supply operations: assortment matching, new-product velocity, merchant KPI diagnosis. Delivered measurable GMV lifts at AliExpress, SHEIN, and Florasis — directly aligned with B2B supply strategy roles.</div>
+        <div class="comp-desc" data-lang="zh">货盘运营到商家成长全链路：品规匹配场域分发、新品破零提效、商家经营指标诊断。在AliExpress、SHEIN、花西子均有可量化GMV增量，与供给策略岗位高度契合。</div>
+        <div class="comp-tags">
+          <span class="comp-tag-mini" data-lang="en">Assortment Ops</span><span class="comp-tag-mini" data-lang="zh">货盘运营</span>
+          <span class="comp-tag-mini" data-lang="en">Merchant KPI</span><span class="comp-tag-mini" data-lang="zh">商家成长</span>
+          <span class="comp-tag-mini" data-lang="en">New Product</span><span class="comp-tag-mini" data-lang="zh">新品提效</span>
+        </div>
+      </div>
+      <div class="comp-card reveal">
+        <div class="comp-icon">🌐</div>
+        <div class="comp-num">Core Strength 02</div>
+        <div class="comp-title" data-lang="en">Dual-Platform Fluency + Cross-border Perspective</div>
+        <div class="comp-title" data-lang="zh">平台 × 品牌双视角 + 跨文化出海</div>
+        <div class="comp-desc" data-lang="en">Composite perspective: platform-side (AliExpress, Poizon) + brand-side (Florasis, SHEIN). Layered with hands-on international GTM experience — collaborated with peers from 20+ countries to develop a DTC brand's Middle East market entry strategy.</div>
+        <div class="comp-desc" data-lang="zh">复合视角：平台方（AliExpress、得物）+ 品牌方（花西子、SHEIN）。叠加国际青年训练营实战经历，与20+国家青年共研DTC品牌中东市场GTM方案，具备真实跨文化协作能力。</div>
+        <div class="comp-tags">
+          <span class="comp-tag-mini" data-lang="en">Platform × Brand</span><span class="comp-tag-mini" data-lang="zh">平台×品牌</span>
+          <span class="comp-tag-mini" data-lang="en">GTM Strategy</span><span class="comp-tag-mini" data-lang="zh">GTM方案</span>
+          <span class="comp-tag-mini" data-lang="en">Cross-cultural</span><span class="comp-tag-mini" data-lang="zh">跨文化协作</span>
+        </div>
+      </div>
+      <div class="comp-card reveal">
+        <div class="comp-icon">🤖</div>
+        <div class="comp-num">Core Strength 03</div>
+        <div class="comp-title" data-lang="en">AI-Native Commerce Builder</div>
+        <div class="comp-title" data-lang="zh">AI赋能电商第一线实践者</div>
+        <div class="comp-desc" data-lang="en">Hands-on across all three AI commerce tracks: validated the <b>1688 AI distribution chain</b> (PDD cold-start, ¥900+ GMV in 3 weeks); tested AI tooling to <b>build a full Shopify store</b>; conducted <b>AI-powered market research</b> (Cider &amp; TYMO reports) and AI social content generation.</div>
+        <div class="comp-desc" data-lang="zh">三条链路全部亲手实操验证：<b>1688 AI分销链路</b>（拼多多冷启，3周GMV 900+）；<b>测试AI工具搭建Shopify独立站</b>；<b>AI市场调查&amp;内容生产</b>（Cider/TYMO深度报告+AI社媒内容生成）。</div>
+        <div class="comp-tags">
+          <span class="comp-tag-mini" data-lang="en">AI Commerce</span><span class="comp-tag-mini" data-lang="zh">AI赋能电商</span>
+          <span class="comp-tag-mini" data-lang="en">0→1 Builder</span><span class="comp-tag-mini" data-lang="zh">从0到1实操</span>
+          <span class="comp-tag-mini" data-lang="en">AIGC Applied</span><span class="comp-tag-mini" data-lang="zh">AIGC实战</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline + Education -->
+    <div class="about-bottom">
+      <div class="tl-card reveal">
+        <div class="tl-label" data-lang="en">Career Timeline</div>
+        <div class="tl-label" data-lang="zh">职业旅程</div>
+        <div class="tl-list">
+
+          <div class="tl-item">
+            <div class="tl-date">2025.11–Now</div>
+            <div class="tl-dots"><div class="tl-dot" style="background:var(--green);box-shadow:0 0 0 4px var(--green-light);"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-co" data-lang="en">Self-Directed Career Exploration</div>
+              <div class="tl-co" data-lang="zh">主动职业探索期</div>
+              <div class="tl-role" data-lang="en">Skill-building across commerce, AI &amp; global markets</div>
+              <div class="tl-role" data-lang="zh">聚焦商业、AI与全球化能力精进</div>
+              <span class="tl-tag tag-e" data-lang="en">Exploring</span><span class="tl-tag tag-e" data-lang="zh">探索中</span>
+              <div class="tl-sub">
+                <div class="tl-sub-item" data-lang="en">2026.3 · 1688 Distribution Chain Validation (PDD cold-start)</div>
+                <div class="tl-sub-item" data-lang="zh">2026.3 · 1688分销链路实操验证（拼多多冷启动）</div>
+                <div class="tl-sub-item" data-lang="en">2026.4 · AI Efficiency Research (Shopify build + XHS content)</div>
+                <div class="tl-sub-item" data-lang="zh">2026.4 · AI提效赋能学习（独立站+小红书内容生成）</div>
+                <div class="tl-sub-item" data-lang="en">2026.5–6 · International Youth Talent Program (GTM for UAE)</div>
+                <div class="tl-sub-item" data-lang="zh">2026.5-6 · 国际青年人才训练营（中东GTM方案）</div>
+                <div class="tl-sub-item" data-lang="en">2026.7 · AI×Textile Industry Advanced Program (ongoing)</div>
+                <div class="tl-sub-item" data-lang="zh">2026.7 · AI赋能纺织服装高研班（进行中）</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-date">2025.9–2025.11</div>
+            <div class="tl-dots"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-co"><span data-lang="en">Poizon</span><span data-lang="zh">得物</span></div>
+              <div class="tl-role" data-lang="en">Fashion Category Marketing</div>
+              <div class="tl-role" data-lang="zh">服装行业营销运营</div>
+              <span class="tl-tag tag-f" data-lang="en">Full-time</span><span class="tl-tag tag-f" data-lang="zh">正式员工</span>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-date">2024.3–2025.9</div>
+            <div class="tl-dots"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-co">AliExpress</div>
+              <div class="tl-role" data-lang="en">Fashion Category Operation · Perf. 3.75</div>
+              <div class="tl-role" data-lang="zh">女装行业运营（绩效 3.75）</div>
+              <span class="tl-tag tag-f" data-lang="en">Full-time</span><span class="tl-tag tag-f" data-lang="zh">正式员工</span>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-date">2023.8–2024.2</div>
+            <div class="tl-dots"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-co">SHEIN</div>
+              <div class="tl-role" data-lang="en">Senior Commodity Strategy</div>
+              <div class="tl-role" data-lang="zh">高级品类企划</div>
+              <span class="tl-tag tag-f" data-lang="en">Full-time</span><span class="tl-tag tag-f" data-lang="zh">正式员工</span>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-date">2022.6–2023.6</div>
+            <div class="tl-dots"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-co"><span data-lang="en">Florasis</span><span data-lang="zh">花西子</span></div>
+              <div class="tl-role" data-lang="en">Brand Product Management Trainee</div>
+              <div class="tl-role" data-lang="zh">品牌产品管培生</div>
+              <span class="tl-tag tag-f" data-lang="en">Full-time</span><span class="tl-tag tag-f" data-lang="zh">正式员工</span>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-date">2021.7–2021.10</div>
+            <div class="tl-dots"><div class="tl-dot"></div><div class="tl-line"></div></div>
+            <div>
+              <div class="tl-co"><span data-lang="en">Bytedance</span><span data-lang="zh">字节跳动</span></div>
+              <div class="tl-role" data-lang="en">E-Commerce Operation Intern · Douyin</div>
+              <div class="tl-role" data-lang="zh">抖音电商运营实习生</div>
+              <span class="tl-tag tag-e" data-lang="en">Internship</span><span class="tl-tag tag-e" data-lang="zh">实习</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="edu-stack reveal">
+        <div style="font-size:11px;font-weight:700;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-lang="en">Education</div>
+        <div style="font-size:11px;font-weight:700;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;" data-lang="zh">教育背景</div>
+        <div class="edu-card">
+          <div class="edu-school">Shanghai Jiao Tong University</div>
+          <div class="edu-deg" data-lang="en">M.Mgmt · Cultural &amp; Creative Industry<br>HBS Cases · Marketing Strategy · Finance · Statistics</div>
+          <div class="edu-deg" data-lang="zh">文化创意产业管理（硕士）<br>管理学（HBS）· 市场营销策略 · 公司财务 · 统计学</div>
+          <div class="edu-pills"><span class="edu-gpa">GPA 3.8 / 4.0</span><span class="edu-pill">2019–2022</span><span class="edu-pill" data-lang="en">SJTU Freshman Scholarship</span><span class="edu-pill" data-lang="zh">新生奖学金</span></div>
+        </div>
+        <div class="edu-card" style="margin-top:14px;">
+          <div class="edu-school">Dalian University of Foreign Languages</div>
+          <div class="edu-deg" data-lang="en">B.A. · Journalism &amp; Communication</div>
+          <div class="edu-deg" data-lang="zh">新闻传播学（学士）</div>
+          <div class="edu-pills">
+            <span class="edu-gpa">GPA 3.7 / 4.0</span>
+            <span class="edu-pill">2015–2019</span>
+            <span class="edu-pill" data-lang="en">National Scholarship</span><span class="edu-pill" data-lang="zh">国家奖学金</span>
+            <span class="edu-pill" data-lang="en">Distinguished Graduate</span><span class="edu-pill" data-lang="zh">辽宁省优秀毕业生</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience" class="section">
+  <div class="section-inner">
+    <div class="sec-label reveal"><span data-lang="en">02 · Experience</span><span data-lang="zh">02 · 工作经历</span></div>
+    <h2 class="sec-title reveal" data-lang="en">Where I've Made Impact</h2>
+    <h2 class="sec-title reveal" data-lang="zh">我曾创造过的价值</h2>
+    <div class="desens-note reveal" data-lang="en">🔒 All metrics have been desensitized for public sharing</div>
+    <div class="desens-note reveal" data-lang="zh">🔒 所有数据信息均已脱敏，可外化传递</div>
+
+    <!-- Full-time -->
+    <div class="exp-section-label reveal"><span data-lang="en">Full-time Roles</span><span data-lang="zh">正式工作经历</span></div>
+    <div class="exp-grid">
+
+      <!-- Poizon -->
+      <div class="exp-card reveal" onclick="toggleExp(this)">
+        <div class="exp-top">
+          <div class="exp-row">
+            <div><div class="exp-co"><span data-lang="en">Poizon</span><span data-lang="zh">得物</span></div><div class="exp-meta">2025.9–2025.11 · <span data-lang="en">Fashion Category Marketing</span><span data-lang="zh">服装行业营销运营</span></div></div>
+            <span class="exp-tag-f" data-lang="en">Full-time</span><span class="exp-tag-f" data-lang="zh">正式</span>
+          </div>
+        </div>
+        <div class="exp-metrics">
+          <div class="exp-m"><div class="exp-mval">200%</div><div class="exp-mlbl" data-lang="en">Stretch Goal<br>Achievement</div><div class="exp-mlbl" data-lang="zh">摸高目标<br>达成率</div></div>
+          <div class="exp-m"><div class="exp-mval">TOP 1</div><div class="exp-mlbl" data-lang="en">Merchant Investment<br>Industry Rank</div><div class="exp-mlbl" data-lang="zh">商家投入<br>行业排名</div></div>
+          <div class="exp-m"><div class="exp-mval">150%</div><div class="exp-mlbl" data-lang="en">New Launch<br>Target</div><div class="exp-mlbl" data-lang="zh">上新季目标<br>完成率</div></div>
+        </div>
+        <div class="exp-toggle"><span data-lang="en">View details</span><span data-lang="zh">查看详情</span><span class="exp-chev">⌄</span></div>
+        <div class="exp-body">
+          <ul>
+            <li data-lang="en"><b>Cross-functional Campaign:</b> Led D11 fashion industry peak-day proposal, achieving 5% QoQ increase in selected brand slots; independently executed November new-launch campaign — secured ~¥3M merchant investment at 150% target completion.</li>
+            <li data-lang="zh"><b>行业中台横向运营：</b>统筹D11服装行业品牌营销、新品营销活动接口及商业化项目落地，拆解目标并协调多方横向资源，推动服装行业商家现金投入金额从最末逆袭至行业Top1，摸高目标达成率200%。</li>
+            <li data-lang="en"><b>Smart Coupon Program:</b> Independently managed D11 Smart Coupon end-to-end (target decomposition, pool selection, progress monitoring, multi-party coordination). Transformed fashion from last-place to #1 in merchant investment volume — 200% stretch goal.</li>
+            <li data-lang="zh"><b>商业化联投：</b>独立统筹D11智能发券项目，目标拆解、底池圈选、进度监控、卡点优化、多方横向协同，服装行业商家投入金额由最末逆袭至TOP1，摸高目标完成率200%。</li>
+          </ul>
+          <div class="exp-img-slot" data-lang="en">📷 Add experience photos here</div>
+          <div class="exp-img-slot" data-lang="zh">📷 在此处插入经历图片</div>
+        </div>
+      </div>
+
+      <!-- AliExpress -->
+      <div class="exp-card reveal" onclick="toggleExp(this)">
+        <div class="exp-top">
+          <div class="exp-row">
+            <div><div class="exp-co">AliExpress</div><div class="exp-meta">2024.3–2025.9 · <span data-lang="en">Fashion Category Operation · Perf. 3.75</span><span data-lang="zh">女装行业运营（绩效 3.75）</span></div></div>
+            <span class="exp-tag-f" data-lang="en">Full-time</span><span class="exp-tag-f" data-lang="zh">正式</span>
+          </div>
+        </div>
+        <div class="exp-metrics">
+          <div class="exp-m"><div class="exp-mval">¥1.3W</div><div class="exp-mlbl" data-lang="en">Daily Incremental<br>GMV Added</div><div class="exp-mlbl" data-lang="zh">日增量<br>GMV</div></div>
+          <div class="exp-m"><div class="exp-mval">+20%</div><div class="exp-mlbl" data-lang="en">Key Merchant<br>YoY Growth</div><div class="exp-mlbl" data-lang="zh">重点商家<br>年同比增长</div></div>
+          <div class="exp-m"><div class="exp-mval">2×</div><div class="exp-mlbl" data-lang="en">New Product<br>Launch Velocity</div><div class="exp-mlbl" data-lang="zh">新品破零<br>效率提升</div></div>
+        </div>
+        <div class="exp-toggle"><span data-lang="en">View details</span><span data-lang="zh">查看详情</span><span class="exp-chev">⌄</span></div>
+        <div class="exp-body">
+          <ul>
+            <li data-lang="en"><b>Supply Assortment Operations:</b> Developed new cargo assortments aligned with channel demand; new assortment翻款 project contributed ¥13,000 daily GMV incremental.</li>
+            <li data-lang="zh"><b>货盘运营：</b>输出货盘品规匹配场域分发&amp;指引商家上新，增量货盘翻款项目新增贡献日均1.3W GMV。</li>
+            <li data-lang="en"><b>Merchant Growth:</b> Fine-grained KPI diagnosis; targeted optimization plans drove 20% YoY growth for key merchants.</li>
+            <li data-lang="zh"><b>商家成长：</b>精细化分析商家各项经营指标，针对性优化商家短板以实现跃迁，重点商家年同比20%增长。</li>
+            <li data-lang="en"><b>New Product Efficiency:</b> Led Fashion Link new-product tool rollout; doubled launch velocity, achieving #1 target completion rate across categories.</li>
+            <li data-lang="zh"><b>新品运营：</b>负责接口Fashion Link新品提效产品在女装行业的落地应用，新品破零效率2倍提升，目标达成率行业第一。</li>
+            <li data-lang="en"><b>Product &amp; AIGC Collaboration:</b> Reduced 2% infringing GMV loss in cooperation with compliance team; piloted AIGC features (virtual try-on, skin replacement, image-to-video) to enhance listing efficiency.</li>
+            <li data-lang="zh"><b>产品协同：</b>协作合规团队降低行业大盘2%侵权GMV折损；通过虚拟试衣、模特换肤、图生视频等AIGC技术测试提升商品效率。</li>
+          </ul>
+          <div class="exp-img-slot" data-lang="en">📷 Add experience photos here</div>
+          <div class="exp-img-slot" data-lang="zh">📷 在此处插入经历图片</div>
+        </div>
+      </div>
+
+      <!-- SHEIN -->
+      <div class="exp-card reveal" onclick="toggleExp(this)">
+        <div class="exp-top">
+          <div class="exp-row">
+            <div><div class="exp-co">SHEIN</div><div class="exp-meta">2023.8–2024.2 · <span data-lang="en">Senior Commodity Strategy</span><span data-lang="zh">高级品类企划</span></div></div>
+            <span class="exp-tag-f" data-lang="en">Full-time</span><span class="exp-tag-f" data-lang="zh">正式</span>
+          </div>
+        </div>
+        <div class="exp-metrics">
+          <div class="exp-m"><div class="exp-mval">100%+</div><div class="exp-mlbl" data-lang="en">GMV Target<br>Consecutive</div><div class="exp-mlbl" data-lang="zh">GMV连续<br>超标达成</div></div>
+          <div class="exp-m"><div class="exp-mval">+50%</div><div class="exp-mlbl" data-lang="en">CTR via<br>Seasonal Tags</div><div class="exp-mlbl" data-lang="zh">厚薄标签<br>点击率提升</div></div>
+        </div>
+        <div class="exp-toggle"><span data-lang="en">View details</span><span data-lang="zh">查看详情</span><span class="exp-chev">⌄</span></div>
+        <div class="exp-body">
+          <ul>
+            <li data-lang="en"><b>Category Management:</b> Monitored category health KPIs, analyzed sell-through and slow-sell drivers, collaborated with buyers and supply chain to optimize operations; achieved consecutive 100%+ GMV targets.</li>
+            <li data-lang="zh"><b>品类管理：</b>监控品类健康度、分析畅滞销原因，协作买手、供应链优化运营指标，类目GMV 100%+达成。</li>
+            <li data-lang="en"><b>Commodity Planning:</b> Identified consumer trends and planned development quantities &amp; key elements; independently delivered SS24 six-month collection direction, steadily improving new product launch success rate.</li>
+            <li data-lang="zh"><b>商品企划：</b>洞察消费趋势，规划开发数量和重点元素，交付SS24半年度开发方向，稳步优化开款成功率。</li>
+            <li data-lang="en"><b>Category Promotion:</b> Established category marketing calendar, coordinated internal/external traffic resources; independently launched seasonal thickness tags, achieving +50% CTR QoQ.</li>
+            <li data-lang="zh"><b>运营推广：</b>制定品类运营日历，协调市场团队站内外推品资源；主导上线品类季节标签，点击率环比+50%。</li>
+          </ul>
+          <div class="exp-img-slot" data-lang="en">📷 Add experience photos here</div>
+          <div class="exp-img-slot" data-lang="zh">📷 在此处插入经历图片</div>
+        </div>
+      </div>
+
+      <!-- Florasis -->
+      <div class="exp-card reveal" onclick="toggleExp(this)">
+        <div class="exp-top">
+          <div class="exp-row">
+            <div><div class="exp-co"><span data-lang="en">Florasis</span><span data-lang="zh">花西子</span></div><div class="exp-meta">2022.6–2023.6 · <span data-lang="en">Brand Product Mgmt Trainee</span><span data-lang="zh">品牌产品管培生</span></div></div>
+            <span class="exp-tag-f" data-lang="en">Full-time</span><span class="exp-tag-f" data-lang="zh">正式</span>
+          </div>
+        </div>
+        <div class="exp-metrics">
+          <div class="exp-m"><div class="exp-mval">9600W+</div><div class="exp-mlbl" data-lang="en">Total Campaign<br>Impressions</div><div class="exp-mlbl" data-lang="zh">活动总<br>曝光量</div></div>
+          <div class="exp-m"><div class="exp-mval">72%</div><div class="exp-mlbl" data-lang="en">Viral Content<br>Rate</div><div class="exp-mlbl" data-lang="zh">爆文率</div></div>
+          <div class="exp-m"><div class="exp-mval">+57%</div><div class="exp-mlbl" data-lang="en">Daily Search<br>Volume</div><div class="exp-mlbl" data-lang="zh">日均搜索<br>人数提升</div></div>
+        </div>
+        <div class="exp-toggle"><span data-lang="en">View details</span><span data-lang="zh">查看详情</span><span class="exp-chev">⌄</span></div>
+        <div class="exp-body">
+          <ul>
+            <li data-lang="en"><b>Category Strategy:</b> Independently completed quarterly/annual category market research &amp; competitor tracking; supported sub-brand incubation through industry research, consumer insights, ingredient barriers, and brand storytelling.</li>
+            <li data-lang="zh"><b>品类策略：</b>独立完成季度、年度品类市场研究与竞品追踪，拆解品类增长驱动因素；参与孵化期子品牌行业研究、消费者调研、成分壁垒、品牌故事全过程建立。</li>
+            <li data-lang="en"><b>New Product Concept:</b> Based on category research and consumer pain points, independently completed high-end cushion concept proposal — integrating positioning, selling point extraction, and IMC plan with intangible cultural heritage elements.</li>
+            <li data-lang="zh"><b>新产品概念开发：</b>基于品类市场研究与消费痛点洞察，独立完成新品高端气垫概念提案，包括定位策略、卖点提炼到IMC方案的全链条输出，融合非遗文化元素与品牌资产。</li>
+            <li data-lang="en"><b>KOL Marketing:</b> Independently managed Q2 Douyin channel ¥2M+ influencer marketing project: spend modeling, account screening, content management, collaboration execution, data tracking — achieving 72% viral rate, 96M+ impressions, +57% daily search.</li>
+            <li data-lang="zh"><b>KOL营销：</b>独立完成Q2抖音渠道200w+费用达人营销项目，包括投放模型搭建、账号筛选、内容把控、合作推进、数据追踪，最终达成爆文率72%，自然曝光2400W+，日均搜索人数提升近57%。</li>
+          </ul>
+          <div class="exp-links">
+            <a href="https://www.douyin.com/user/MS4wLjABAAAAjAGFbkVPj_MQogZGUNBHJeKqa2kMS6ieruUmXZX6-C8?modal_id=7237436233905982759" target="_blank" class="exp-link" data-lang="en">📹 KOL Case 1</a>
+            <a href="https://www.douyin.com/user/MS4wLjABAAAAjAGFbkVPj_MQogZGUNBHJeKqa2kMS6ieruUmXZX6-C8?modal_id=7237436233905982759" target="_blank" class="exp-link" data-lang="zh">📹 达人案例 1</a>
+            <a href="https://www.douyin.com/user/MS4wLjABAAAAp6YdnFW39LQhyewa4h_-qRqPF_BuHyu85LkpYPuViYtBICjC6uq2qOs75pzP-AWM?modal_id=7236703647508335909" target="_blank" class="exp-link" data-lang="en">📹 KOL Case 2</a>
+            <a href="https://www.douyin.com/user/MS4wLjABAAAAp6YdnFW39LQhyewa4h_-qRqPF_BuHyu85LkpYPuViYtBICjC6uq2qOs75pzP-AWM?modal_id=7236703647508335909" target="_blank" class="exp-link" data-lang="zh">📹 达人案例 2</a>
+          </div>
+          <div class="exp-img-slot" data-lang="en">📷 Add marketing data screenshots here</div>
+          <div class="exp-img-slot" data-lang="zh">📷 在此处插入营销数据结果截图</div>
+        </div>
+      </div>
+
+    </div><!-- end exp-grid full-time -->
+
+    <!-- Internships -->
+    <div class="exp-section-label reveal" style="margin-top:32px;"><span data-lang="en">Internships</span><span data-lang="zh">实习经历</span></div>
+    <div class="exp-grid">
+
+      <!-- Bytedance -->
+      <div class="exp-card reveal" onclick="toggleExp(this)">
+        <div class="exp-top">
+          <div class="exp-row">
+            <div><div class="exp-co"><span data-lang="en">Bytedance</span><span data-lang="zh">字节跳动</span></div><div class="exp-meta">2021.7–2021.10 · <span data-lang="en">E-Commerce Operation Intern · Douyin Super New Launch</span><span data-lang="zh">抖音电商超级新品项目实习生</span></div></div>
+            <span class="exp-tag-i" data-lang="en">Internship</span><span class="exp-tag-i" data-lang="zh">实习</span>
+          </div>
+        </div>
+        <div class="exp-metrics">
+          <div class="exp-m"><div class="exp-mval">600W+</div><div class="exp-mlbl" data-lang="en">Landing Page<br>UVs</div><div class="exp-mlbl" data-lang="zh">落地页<br>UV</div></div>
+          <div class="exp-m"><div class="exp-mval">10亿</div><div class="exp-mlbl" data-lang="en">Hashtag Page<br>Views</div><div class="exp-mlbl" data-lang="zh">话题页<br>播放量</div></div>
+          <div class="exp-m"><div class="exp-mval">¥300W</div><div class="exp-mlbl" data-lang="en">Influencer<br>GMV Added</div><div class="exp-mlbl" data-lang="zh">达人带货<br>增量GMV</div></div>
+        </div>
+        <div class="exp-toggle"><span data-lang="en">View details</span><span data-lang="zh">查看详情</span><span class="exp-chev">⌄</span></div>
+        <div class="exp-body">
+          <ul>
+            <li data-lang="en"><b>In-app Promotion:</b> Independently built and launched activity landing pages, search resource placements, and hashtag topic pages for the "Douyin Super New Launch" IP. Achieved 6M+ UV and 1B+ hashtag plays.</li>
+            <li data-lang="zh"><b>营销传播：</b>独立搭建超级新品站内宣发资源并上线，达成落地页600W+ UV，话题页10亿次播放。</li>
+            <li data-lang="en"><b>New Product Incubation:</b> Supported new product campaign assortment curation &amp; merchant-influencer matchmaking; completed delivery of 300+ quality new SKUs, built 70+ influencer community from scratch — contributing ¥3M incremental GMV.</li>
+            <li data-lang="zh"><b>新品孵化：</b>支持新品活动货盘选品&amp;商达撮合，完成300+调性新品输送，70+达人建联，增量GMV 300W。</li>
+          </ul>
+          <div class="exp-img-slot" data-lang="en">📷 Add experience photos here (campaign screenshots, hashtag page, etc.)</div>
+          <div class="exp-img-slot" data-lang="zh">📷 在此处插入经历图片（活动截图、话题页等）</div>
+        </div>
+      </div>
+
+    </div><!-- end exp-grid internship -->
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects" class="section">
+  <div class="section-inner">
+    <div class="sec-label reveal"><span data-lang="en">03 · Projects</span><span data-lang="zh">03 · 实操项目</span></div>
+    <h2 class="sec-title reveal" data-lang="en">Self-Directed Commerce Building</h2>
+    <h2 class="sec-title reveal" data-lang="zh">职业探索期 · 亲手做，才真懂</h2>
+    <p class="sec-desc reveal" style="margin-bottom:36px;" data-lang="en">Real operator experience across 1688 sourcing, AI-powered commerce, cross-border GTM, and industry deep-dives.</p>
+    <p class="sec-desc reveal" style="margin-bottom:36px;" data-lang="zh">1688分销、AI赋能建站、跨文化出海GTM、行业专业精进。</p>
+
+    <div class="proj-grid">
+
+      <!-- Project 1: 1688分销链路验证 -->
+      <div class="proj-card reveal">
+        <div class="proj-img">
+          <img src="素材/拼多多店铺示意图.jpg" alt="PDD Store">
+          <div class="proj-overlay"></div>
+          <div class="proj-label">
+            <div class="proj-tag" data-lang="en">2026.3 · 1688 Distribution Chain · PDD Cold Start</div>
+            <div class="proj-tag" data-lang="zh">2026.3 · 1688分销链路 · 拼多多冷启动</div>
+            <div class="proj-name" data-lang="en">1688 Distribution Chain Validation</div>
+            <div class="proj-name" data-lang="zh">1688分销店铺链路验证</div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <p class="proj-desc" data-lang="en">Validated the 1688 AI-powered distribution chain end-to-end: opened a PDD dropshipping store and independently ran product selection, supplier sourcing, automated listing, promotions, fulfillment, and reverse logistics — cold-starting from zero to ¥900+ GMV in 3 weeks.</p>
+          <p class="proj-desc" data-lang="zh">测试1688 AI版分销链路，开设PDD分销店铺，实操选品、供应商寻源、自动化上架、商品活动、履约逆向全链路运营，3周内从0-1冷启，成交GMV 900+。</p>
+          <!-- 图片并排：1fr 1fr 等宽 130px高 -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
+            <div style="border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);">
+              <img src="素材/拼多多店铺示意图.jpg" alt="Store" style="width:100%;height:130px;object-fit:cover;display:block;">
+              <div style="padding:6px 10px;background:var(--surface2);border-top:1px solid var(--border);font-size:10px;color:var(--ink-3);font-weight:500;" data-lang="en">🛒 Store Listing View</div>
+              <div style="padding:6px 10px;background:var(--surface2);border-top:1px solid var(--border);font-size:10px;color:var(--ink-3);font-weight:500;" data-lang="zh">🛒 店铺商品示意</div>
+            </div>
+            <div style="border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);">
+              <img src="素材/拼多多店铺运营数据.png" alt="Analytics" style="width:100%;height:130px;object-fit:cover;object-position:top;display:block;">
+              <div style="padding:6px 10px;background:var(--surface2);border-top:1px solid var(--border);font-size:10px;color:var(--ink-3);font-weight:500;" data-lang="en">📊 Store Analytics · Mar 2026</div>
+              <div style="padding:6px 10px;background:var(--surface2);border-top:1px solid var(--border);font-size:10px;color:var(--ink-3);font-weight:500;" data-lang="zh">📊 店铺运营数据 · 2026年3月</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: AI电商运营提效实操验证（独立站 + 深度调研 合并） -->
+      <div class="proj-card reveal">
+        <div class="proj-img-duo">
+          <img src="素材/独立站主图1.png" alt="Shopify Store 1">
+          <img src="素材/独立站主图2.png" alt="Shopify Store 2">
+          <div class="proj-overlay"></div>
+          <div class="proj-label">
+            <div class="proj-tag" data-lang="en">2026.4 · AI Commerce Efficiency · US Market</div>
+            <div class="proj-tag" data-lang="zh">2026.4 · AI电商提效实操验证</div>
+            <div class="proj-name" data-lang="en">AI Commerce Efficiency Validation</div>
+            <div class="proj-name" data-lang="zh">AI电商运营提效实操验证</div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <p class="proj-desc" data-lang="en">Used AI tools (Accio Work / Claude) to validate two commerce efficiency tracks: <b>① AI store building</b> — tested AI tooling to build a full Shopify store (The Whimsical Nook) targeting the US market as a zero-experience seller, covering product selection, listing, store design and social strategy; <b>② AI market research &amp; content generation</b> — produced in-depth cross-border research reports (Cider &amp; TYMO).</p>
+          <p class="proj-desc" data-lang="zh">使用AI工具（Accio Work / Claude）验证两条提效链路：<b>① AI建站</b>——测试验证AI工具搭建独立站The Whimsical Nook，以零基础卖家视角完成0到1搭建（选品、Listing优化、店铺设计、社媒策略）；<b>② AI市场调查&amp;内容生产</b>——输出Cider &amp; TYMO跨境品牌深度调研报告。</p>
+          <div style="margin-top:14px;padding:12px 16px;background:var(--green-light);border:1px solid var(--green-mid);border-radius:var(--radius-sm);font-size:12px;color:var(--accent);">
+            <span data-lang="en">👆 Click to view research reports: </span>
+            <span data-lang="zh">👆 点击查看调研报告详情：</span>
+            <a href="https://irisyuan0926-blip.github.io/research/Cider.html" target="_blank" style="color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:2px;margin-left:4px;" data-lang="en">Cider</a>
+            <a href="https://irisyuan0926-blip.github.io/research/Cider.html" target="_blank" style="color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:2px;margin-left:4px;" data-lang="zh">Cider</a>
+            <span style="margin:0 4px;opacity:.4;">·</span>
+            <a href="https://irisyuan0926-blip.github.io/research/tymo.html" target="_blank" style="color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:2px;" data-lang="en">TYMO</a>
+            <a href="https://irisyuan0926-blip.github.io/research/tymo.html" target="_blank" style="color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:2px;" data-lang="zh">TYMO</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: Cross-border GTM (wide card, 重新排版) -->
+      <div class="proj-card proj-card-wide reveal">
+        <div style="padding:28px 28px 20px;">
+          <!-- 顶部：标题区 -->
+          <div style="margin-bottom:16px;">
+            <div class="proj-tag" style="color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;" data-lang="en">2026.5–6 · Cross-cultural Collaboration · Full Scholarship</div>
+            <div class="proj-tag" style="color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;" data-lang="zh">2026.5-6 · 出海研习 &amp; 跨文化协作 · 全额奖学金</div>
+            <div style="font-family:'Lora',serif;font-size:24px;font-weight:600;color:var(--ink);margin-top:8px;" data-lang="en">International Youth Talent Program · UAE GTM Strategy</div>
+            <div style="font-family:'Lora',serif;font-size:24px;font-weight:600;color:var(--ink);margin-top:8px;" data-lang="zh">国际青年人才训练营 · 中东市场GTM方案</div>
+          </div>
+          <!-- 中部：描述 + 链接 -->
+          <div style="margin-bottom:20px;">
+            <p class="proj-desc" style="margin-bottom:12px;" data-lang="en">2026.5–2026.6 International Youth Talent Program (Shanghai Changning Government support · Full Scholarship). Collaborated with peers from 20+ countries to develop a DTC brand's go-to-market strategy for the UAE market — covering market analysis, consumer insights, competitor research, brand positioning, content touchpoints, and cold-start path design.</p>
+            <p class="proj-desc" style="margin-bottom:12px;" data-lang="zh">2026.5-2026.6 国际青年人才训练营（上海长宁政府支持/全奖），与来自20+国家青年共研品牌出海策略，完成DTC品牌进入中东市场GTM方案，涵盖市场分析、用户洞察、竞品研究、品牌定位、内容触点与冷启路径设计。</p>
+            <a href="https://my.feishu.cn/wiki/WidGwBQX8iQdgnkpsqNcEEUDnxb" target="_blank" class="proj-link" data-lang="en">📋 View Full GTM Proposal (Feishu)</a>
+            <a href="https://my.feishu.cn/wiki/WidGwBQX8iQdgnkpsqNcEEUDnxb" target="_blank" class="proj-link" data-lang="zh">📋 查看完整GTM方案（飞书）</a>
+          </div>
+          <!-- 底部：照片多行多列 -->
+          <div>
+            <div style="font-size:11px;font-weight:700;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;" data-lang="en">Activity Photos</div>
+            <div style="font-size:11px;font-weight:700;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;" data-lang="zh">活动照片</div>
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;">
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片1.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片1.jpg" alt="Activity 1"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片2.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片2.jpg" alt="Activity 2"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片3.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片3.jpg" alt="Activity 3"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片4.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片4.jpg" alt="Activity 4"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片5.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片5.jpg" alt="Activity 5"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片6.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片6.jpg" alt="Activity 6"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片7.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片7.jpg" alt="Activity 7"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片8.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片8.jpg" alt="Activity 8"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片9.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片9.jpg" alt="Activity 9"></div>
+              <div class="gallery-img" onclick="openLightbox('素材/活动照片10.jpg')" style="width:auto;height:140px;"><img src="素材/活动照片10.jpg" alt="Activity 10"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4: AI Textile Industry Program -->
+      <div class="proj-card reveal">
+        <div style="padding:28px 28px 0;">
+          <div style="width:40px;height:40px;background:var(--green-light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;">🧵</div>
+          <div style="font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;" data-lang="en">2026.7 · Industry Deep-Dive</div>
+          <div style="font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;" data-lang="zh">2026.7 · 行业专业知识精进</div>
+          <div style="font-family:'Lora',serif;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:14px;line-height:1.3;display:flex;align-items:center;gap:10px;">
+            <span data-lang="en">AI×Textile Industry Advanced Program</span>
+            <span data-lang="zh">人工智能赋能纺织服装产业创新高研班</span>
+            <span style="font-family:'Sora',sans-serif;font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;background:var(--green-light);color:var(--accent);border:1px solid var(--green-mid);letter-spacing:.06em;flex-shrink:0;"><span data-lang="en">ONGOING</span><span data-lang="zh">进行中</span></span>
+          </div>
+        </div>
+        <div style="padding:0 28px 28px;">
+          <p class="proj-desc" data-lang="en">"AI-Empowered Innovation in the Textile &amp; Apparel Industry" Advanced Training Program (Supported by Zhejiang Provincial Human Resources and Social Security Department &amp; Provincial Apparel Industry Association · Full Scholarship). Deep-diving into the intersection of AI technology and traditional textile manufacturing — integrating supply chain intelligence, smart design, and digital transformation in fashion.</p>
+          <p class="proj-desc" data-lang="zh">《人工智能赋能纺织服装产业创新》高研班（浙江省人社厅&amp;省服装行业协会支持，全奖），深入探索AI技术与传统纺织服装制造业的结合——供应链智能化、智慧设计、服装产业数字化转型。</p>
+          <div class="proj-stats" style="border-top:1px solid var(--border);padding-top:14px;margin-top:4px;">
+            <div><div class="pstat-val">Full</div><div class="pstat-lbl" data-lang="en">Scholarship</div><div class="pstat-lbl" data-lang="zh">全额奖学金</div></div>
+            <div><div class="pstat-val">Gov.</div><div class="pstat-lbl" data-lang="en">Zhejiang Supported</div><div class="pstat-lbl" data-lang="zh">浙江省级支持</div></div>
+            <div><div class="pstat-val">AI×</div><div class="pstat-lbl" data-lang="en">Fashion Industry</div><div class="pstat-lbl" data-lang="zh">纺织服装</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end proj-grid -->
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="sec-label" style="display:inline-flex;margin-bottom:10px;">
+      <span data-lang="en">04 · Let's Connect</span><span data-lang="zh">04 · 期待联系</span>
+    </div>
+    <h2 class="contact-title" data-lang="en">Open to<br><span class="green">New Opportunities</span></h2>
+    <h2 class="contact-title" data-lang="zh">期待<br><span class="green">新的可能</span></h2>
+    <p class="contact-sub" data-lang="en">Exploring roles in cross-border supply strategy, e-commerce operations, or AI-powered growth. Let's talk.</p>
+    <p class="contact-sub" data-lang="zh">正在寻找跨境供给策略、电商运营或AI赋能增长相关岗位，欢迎来聊。</p>
+    <div class="contact-cards">
+      <a href="mailto:irisyuan0926@163.com" class="contact-card">
+        <div class="contact-icon">✉</div>
+        <span class="contact-lbl">Email</span>
+        <span class="contact-val">irisyuan0926@163.com</span>
+      </a>
+      <a href="tel:18547785996" class="contact-card">
+        <div class="contact-icon">✆</div>
+        <span class="contact-lbl">Phone</span>
+        <span class="contact-val">185-4778-5996</span>
+      </a>
+      <a href="https://www.linkedin.com/in/iris-y-6a75a7154" target="_blank" class="contact-card">
+        <div class="contact-icon" style="font-size:13px;font-weight:700;">in</div>
+        <span class="contact-lbl">LinkedIn</span>
+        <span class="contact-val">iris-y-6a75a7154</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-lang="en">© 2026 Yingying Yuan (Iris) · All rights reserved</span>
+  <span data-lang="zh">© 2026 苑盈莹（Iris）· 保留所有权利</span>
+  <span style="font-size:11px;" data-lang="en">Shanghai · Open to relocation</span>
+  <span style="font-size:11px;" data-lang="zh">上海 · 可考虑异地机会</span>
+</footer>
+
+</div><!-- end .page -->
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- Floating Chat -->
+<div class="chat-float">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-head">
+      <div class="chat-head-l">
+        <img class="chat-av" src="素材/个人照片.png" alt="Iris">
+        <div class="chat-head-info">
+          <h4 data-lang="en">Iris's AI Twin</h4>
+          <h4 data-lang="zh">Iris 数字分身</h4>
+          <p><span class="chat-dot"></span> <span data-lang="en">Online · Ask me anything</span><span data-lang="zh">在线 · 欢迎提问</span></p>
+        </div>
+      </div>
+      <button class="chat-x" onclick="toggleChat()">×</button>
+    </div>
+    <div class="chat-msgs" id="chatMsgs">
+      <div class="msg iris" data-lang="en">Hi! 👋 I'm Iris's AI twin. Ask me about her supply-side experience, AI projects, or anything else!</div>
+      <div class="msg iris" data-lang="zh">你好！👋 我是Iris的数字分身，可以问我关于供给侧运营经历、AI实操项目、跨文化协作等任何问题！</div>
+    </div>
+    <div class="chat-inp-row">
+      <input class="chat-inp" id="chatInp" type="text" placeholder="Ask Iris something..." onkeypress="if(event.key==='Enter')sendChat()">
+      <button class="chat-send" onclick="sendChat()">↑</button>
+    </div>
+  </div>
+  <button class="chat-btn" onclick="toggleChat()">
+    <div class="chat-icon">💬</div>
+    <span data-lang="en">Let's chat</span><span data-lang="zh">来聊聊</span>
+  </button>
+</div>
+
+<script>
+// ── LANG ──
+function setLang(l) {
+  document.body.className = l==='zh' ? 'zh' : '';
+  document.getElementById('btnEn').className = 'lang-btn' + (l==='en' ? ' active' : '');
+  document.getElementById('btnZh').className = 'lang-btn' + (l==='zh' ? ' active' : '');
+  // re-run tagline for current lang
+  startTagline();
+}
+
+// ── TYPEWRITER ──
+const taglines = {
+  en: [
+    'Supply-Side Operator × Brand × Platform',
+    'Cross-border GTM Strategist',
+    'AI-Native Commerce Builder'
+  ],
+  zh: [
+    '供给侧运营 × 平台 × 品牌双视角',
+    '跨文化出海策略实践者',
+    'AI赋能电商第一线建设者'
+  ]
+};
+let twTimer = null;
+function getLang() { return document.body.classList.contains('zh') ? 'zh' : 'en'; }
+function startTagline() {
+  clearTimeout(twTimer);
+  const el = document.getElementById('heroTagline');
+  if (!el) return;
+  const lines = taglines[getLang()];
+  let li = 0, ci = 0, deleting = false, pauseCount = 0;
+  el.innerHTML = '<span class="cursor"></span>';
+  function tick() {
+    const line = lines[li];
+    if (!deleting) {
+      if (ci <= line.length) {
+        el.innerHTML = escHtml(line.slice(0, ci)) + '<span class="cursor"></span>';
+        ci++;
+        twTimer = setTimeout(tick, ci === 1 ? 400 : 55);
+      } else {
+        pauseCount++;
+        if (pauseCount < 22) { twTimer = setTimeout(tick, 80); }
+        else { deleting = true; pauseCount = 0; twTimer = setTimeout(tick, 60); }
+      }
+    } else {
+      if (ci > 0) {
+        ci--;
+        el.innerHTML = escHtml(line.slice(0, ci)) + '<span class="cursor"></span>';
+        twTimer = setTimeout(tick, 32);
+      } else {
+        deleting = false;
+        li = (li + 1) % lines.length;
+        twTimer = setTimeout(tick, 300);
+      }
+    }
+  }
+  tick();
+}
+
+// Hero name typed once
+function typeHeroName() {
+  const el = document.getElementById('heroName');
+  const full = 'Yingying Yuan';
+  let i = 0;
+  function t() {
+    if (i <= full.length) {
+      const plain = full.slice(0, i);
+      const yuanStart = full.indexOf(' Yuan');
+      if (yuanStart >= 0 && i > yuanStart + 1) {
+        el.innerHTML = escHtml(full.slice(0, yuanStart + 1)) + '<span class="green">' + escHtml(full.slice(yuanStart + 1, i)) + '</span>';
+      } else {
+        el.innerHTML = escHtml(plain);
+      }
+      i++;
+      setTimeout(t, i < 10 ? 80 : 60);
+    } else {
+      // start tagline after name done
+      setTimeout(startTagline, 200);
+    }
+  }
+  setTimeout(t, 400);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  typeHeroName();
+});
+
+// ── REVEAL ──
+const ro = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('visible');
+}), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// ── EXP EXPAND ──
+function toggleExp(c) {
+  const was = c.classList.contains('open');
+  document.querySelectorAll('.exp-card.open').forEach(x => x.classList.remove('open'));
+  if (!was) c.classList.add('open');
+}
+
+// ── LIGHTBOX ──
+function openLightbox(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+// ── CHAT ──
+function toggleChat() { document.getElementById('chatPanel').classList.toggle('open'); }
+
+function sendChat() {
+  const inp = document.getElementById('chatInp');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  const box = document.getElementById('chatMsgs');
+  box.innerHTML += `<div class="msg user">${escHtml(msg)}</div>`;
+  box.scrollTop = box.scrollHeight;
+  const cn = document.body.classList.contains('zh');
+  setTimeout(() => {
+    const reply = getReply(msg, cn);
+    box.innerHTML += `<div class="msg iris">${reply}</div>`;
+    box.scrollTop = box.scrollHeight;
+  }, 600 + Math.random() * 400);
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getReply(msg, cn) {
+  const m = msg.toLowerCase();
+  if (cn) {
+    if (/经验|工作|简历|背景|经历/.test(m)) return "我有3年以上时尚电商运营经验，在AliExpress（平台方）、SHEIN、花西子、得物均有正式工作经历，覆盖供给侧运营、商品企划、商家成长、营销运营全链路。目前正处于主动职业探索期，技能持续精进中。";
+    if (/aliexpress|阿里|国际站/.test(m)) return "在AliExpress我担任女装行业运营（绩效3.75），核心工作：货盘品规运营（日均+1.3W GMV）、商家成长诊断（重点商家年同比20%增长）、新品破零效率提升2倍、参与AIGC功能（虚拟试衣、图生视频）测试落地。";
+    if (/shein|希音/.test(m)) return "在SHEIN担任高级品类企划，独立完成SS24半年度系列规划，类目GMV连续100%+达成，独立上线厚薄季节标签使点击率提升50%。";
+    if (/花西子|florasis/.test(m)) return "在花西子担任品牌产品管培生，独立操盘200万+抖音达人营销项目，达成爆文率72%，自然曝光2400W+，日均搜索提升57%。还独立完成了新品高端气垫IMC提案，融合非遗文化元素。";
+    if (/得物|poizon/.test(m)) return "在得物担任服装营销运营，统筹D11智能发券项目，服装行业商家投入金额由最末逆袭至TOP1，摸高目标达成率200%！上新季目标完成率150%。";
+    if (/供给|供应链|货盘|选品/.test(m)) return "供给侧运营是我的核心优势之一：在AliExpress做过货盘品规匹配、场域分发、新品提效；在1688/PDD项目中实操了完整的分销链路（选品→供应商寻源→上架→促销→履约）。国际站2B和1688的业务逻辑类似，这些经验可以直接迁移。";
+    if (/ai|人工智能|aigc/.test(m)) return "AI是我主动学习的方向：①在AliExpress参与虚拟试衣、模特换肤、图生视频等AIGC技术的商品效率测试；②用AI工具3天搭建Shopify独立站；③用AI生成小红书调研贴，曝光2000+；④沉淀了两份深度市场调研报告（Cider/TYMO）。";
+    if (/拼多多|pdd|1688|分销/.test(m)) return "我用3周时间从0冷启动了拼多多分销店铺，实操1688 AI版分销链路：选品→供应商寻源→自动化上架→活动促销→履约→逆向物流全链路，最终实现GMV 900+，39笔订单，转化率2.87%。";
+    if (/shopify|独立站/.test(m)) return "以零基础卖家视角，借助Accio Work AI工具，3天内完成独立站The Whimsical Nook从0到1搭建，涵盖选品、Listing优化、店铺设计、社媒策略全链路。亲身验证了AI辅助电商建站的能力边界。";
+    if (/出海|gtm|中东|跨文化|国际/.test(m)) return "2026.5-6国际青年人才训练营（上海长宁政府支持/全奖），与来自20+国家的青年共研品牌出海策略，完成DTC品牌进入UAE市场的GTM方案，涵盖市场分析、用户洞察、竞品研究、品牌定位、内容触点与冷启路径设计。";
+    if (/纺织|服装|高研班|浙江/.test(m)) return "2026.7参加《人工智能赋能纺织服装产业创新》高研班（浙江省人社厅&省服装行业协会支持，全奖），深入研究AI技术在服装供应链智能化、智慧设计等场景的应用。";
+    if (/教育|学历|学校|交通大学|大连|gpa/.test(m)) return "上海交通大学 文化创意产业管理（硕士）GPA 3.8/4.0，主修管理学（HBS Case Study）、营销策略、公司财务、统计学。大连外国语大学 新闻传播学（学士）GPA 3.7/4.0，国家奖学金，辽宁省优秀毕业生。";
+    if (/联系|邮件|电话|微信/.test(m)) return "随时欢迎联系我！📧 irisyuan0926@163.com  📞 185-4778-5996（微信同）  💼 LinkedIn: iris-y-6a75a7154";
+    if (/优势|竞争力|特点|特长|为什么/.test(m)) return "三大核心竞争力：①供给侧运营×商家成长——AliExpress/SHEIN/花西子均有可量化GMV成果，与国际站供给策略岗直接对接；②平台×品牌双视角+跨文化出海——罕见的双重经验叠加实际GTM项目；③AI赋能电商第一线实践者——不只谈AI，而是亲手验证并输出洞察。";
+    if (/求职|招聘|机会|岗位|gap/.test(m)) return "目前正在主动寻找新机会，重点方向：跨境供给策略、电商运营、AI赋能增长相关岗位（尤其对阿里国际站方向感兴趣）。Gap期持续精进技能，欢迎通过 irisyuan0926@163.com 联系！";
+    return "感谢你的问题！我是Iris的数字分身，可以回答关于她供给侧运营经历、AI项目、出海经历、教育背景等问题。试试问：她在AliExpress做了什么？她的三大竞争优势？她做过哪些AI项目？";
+  } else {
+    if (/experience|background|work|career|resume/.test(m)) return "I have 3+ years in fashion e-commerce — AliExpress (platform side), SHEIN, Florasis, and Poizon (brand/platform hybrid). Core expertise: supply-side operations, merchant growth, commodity planning, and influencer marketing. Currently in a self-directed exploration phase, actively building skills.";
+    if (/aliexpress|international/.test(m)) return "At AliExpress I was a Fashion Category Operator (performance 3.75). Key wins: new assortment project added ¥13K daily GMV, key merchants grew 20% YoY, led new-product efficiency tool doubling launch velocity (#1 across categories), and piloted AIGC features (virtual try-on, video gen) for listing quality.";
+    if (/shein/.test(m)) return "At SHEIN I was a Senior Commodity Strategist. Independently delivered the SS24 six-month collection plan, achieved consecutive 100%+ GMV targets, and launched seasonal tags boosting CTR by 50% QoQ.";
+    if (/florasis|huaxizi/.test(m)) return "At Florasis I was a Brand Product Management Trainee. Proudest achievement: independently managed a ¥2M+ Douyin influencer campaign — 72% viral content rate, 96M+ impressions, +57% daily search volume. Also completed a high-end cushion product concept integrating intangible cultural heritage.";
+    if (/poizon|dewu/.test(m)) return "At Poizon I led fashion category marketing. D11 Smart Coupon Program: transformed fashion from last place to #1 in merchant investment — 200% stretch goal. New-launch campaign: 150% target completion with ~¥3M merchant investment.";
+    if (/supply|sourcing|assortment|cargo/.test(m)) return "Supply-side operations is one of my core strengths: at AliExpress I did assortment matching, channel distribution, and new-product efficiency; at PDD/1688 I validated the full distribution chain (selection → supplier sourcing → listing → promotions → fulfillment). The B2B logic maps directly to international platform supply strategy roles.";
+    if (/ai|aigc|artificial|tool/.test(m)) return "I'm hands-on with AI in commerce: ① Piloted AIGC (virtual try-on, video gen) at AliExpress; ② Built a full Shopify store in 3 days with AI tools; ③ Used AI to generate Xiaohongshu content with 2000+ impressions; ④ Produced two deep market research reports (Cider/TYMO) with AI assistance.";
+    if (/pdd|pinduoduo|1688|distribution/.test(m)) return "I cold-started a PDD dropshipping store from zero in 3 weeks — validating the full 1688 AI distribution chain: product selection → supplier sourcing → automated listing → promotions → fulfillment → returns. Result: ¥900+ GMV, 39 orders, 2.87% conversion. Great proof of B2B supply chain understanding.";
+    if (/shopify|store|independent/.test(m)) return "As a zero-experience seller, I built 'The Whimsical Nook' Shopify store targeting the US market in just 3 days using Accio Work AI tools — covering product selection, listing optimization, store design, and social strategy. Validated AI's e-commerce building capability firsthand.";
+    if (/cross.border|gtm|middle.east|international|global/.test(m)) return "2026.5–6 International Youth Talent Program (Shanghai Changning Government support, full scholarship). Collaborated with peers from 20+ countries to build a DTC brand's UAE market GTM strategy: market analysis, consumer insights, competitor research, brand positioning, content touchpoints, and cold-start path design.";
+    if (/textile|apparel|fashion|zhejiang/.test(m)) return "2026.7 'AI-Empowered Innovation in Textile & Apparel' Advanced Program (Zhejiang Provincial Gov. support, full scholarship). Deep-diving into AI applications in supply chain intelligence, smart design, and digital transformation in the fashion industry.";
+    if (/education|school|university|degree|gpa/.test(m)) return "MSc in Cultural & Creative Industry Management from Shanghai Jiao Tong University (GPA 3.8/4.0) — HBS Case Study, Marketing Strategy, Corporate Finance, Statistics. BA in Journalism & Communication from Dalian University of Foreign Languages (GPA 3.7/4.0) — National Scholarship, Distinguished Graduate.";
+    if (/contact|email|phone|reach|hire/.test(m)) return "Feel free to reach out! 📧 irisyuan0926@163.com  📞 185-4778-5996  💼 LinkedIn: iris-y-6a75a7154  I'm actively exploring opportunities in cross-border supply strategy and e-commerce operations.";
+    if (/strength|skill|advantage|unique|why|fit/.test(m)) return "Three core strengths: ① Supply-side ops & merchant growth — quantified GMV results across AliExpress, SHEIN, Florasis, directly aligned with supply strategy roles; ② Platform × brand dual-perspective + cross-border GTM — rare combination with real project proof; ③ AI-native commerce builder — hands-on practitioner, not just a trend follower.";
+    if (/hello|hi|hey|good/.test(m)) return "Hey! 👋 I'm Iris's AI twin. Ask me about her supply-side experience, AI projects, cross-border work, or anything else — happy to help!";
+    return "Great question! I'm Iris's AI twin. Try asking: What's her experience at AliExpress? What are her three core strengths? What AI projects has she done? What's the cross-border GTM project about?";
+  }
+}
+</script>
+</body>
+</html>
